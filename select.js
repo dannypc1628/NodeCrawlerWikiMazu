@@ -12,29 +12,35 @@ request(URL, (err, res, body) => {
         var obj = {
             table: []
          };
-
-        // $(".wikitable tbody tr").each(function(i,ele){
-        //     console.log($(this).text().split("\n"));
-        // });
-
-        // $(".wikitable tbody tr").each(function(i,ele){
-        //     console.log($(this).eq(0).text()+"  "+$(this).eq(1).text()+" "+$(this).eq(2).text()+" "+$(this).eq(3).text());
-        // });
-
         
         cheerioTable($);
         var data = $(".wikitable").parsetable(true,true,true);
-        //  console.log(data[0][0]);
-        //  console.log(data.length);
-        //  console.log(data[0].length);
+        //   console.log(data[0][1]);
+        //   console.log(data[0][2]);
+        //   console.log(data.length);
+        //   console.log(data[0].length);
  
+          var regular=[];
          for(var i = 0;i<data[0].length;i++){
-             for(var j = 0 ; j < data.length ; j++){
-                if(j!=2){
-                    console.log(data[j][i]);
-                }
-                    
+
+             regular = data[4][i].match('[0-9]{4}');
+             var regYear="";
+             
+             if(regular!=null){
+                regYear=regular[0];
              }
-             console.log("\n");
-         }
+             obj.table.push({county: data[0][i], location:data[1][i],name:data[3][i],year:data[4][i],regularYear:regYear,note:data[5][i]});  
+        }
+
+        var json = JSON.stringify(obj);
+        console.log(json);
+
+        fs.writeFile('data.json', json, 'utf8', function(err){
+            if(err){
+                console.log(err);
+            }
+            else{
+                console.log("seccess！");
+            }
+        });
   });
