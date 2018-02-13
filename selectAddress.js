@@ -2,25 +2,36 @@
 var fs = require("fs");
 
 var googleMapsClient = require("@google/maps").createClient({
-    key: k
+    key: "A"
 });
-
+var obj=[];
 fs.readFile('data.json', 'utf8', function (err, data) {
     if (err) throw err;
-    var obj = JSON.parse(data);
+     obj = JSON.parse(data);
     console.log(obj.table[0].county);
     console.log(obj.table.length);
     var objStr = obj.table;
     //obj.table.length
-    for(var i = 1;i < obj.table.length ;i++){
-        inputData(obj.table[i],i);
-    }
+    //for(var i = 1;i < obj.table.length ;i++){
+        //inputData(obj.table[i],i);
+        timer=setInterval(test,800);
+    //}
   });
 
   var obj2 = {
     table: []
  };
-  
+ var y=0
+ function test(){
+    inputData(obj.table[y],y); 
+    //console.log(y);
+    //console.log(obj.table[y].county+" "+obj.table[y].location+" "+obj.table[y].name);
+    y++;
+    if(y>=obj.table.length){
+        clearInterval(timer);
+        setTimeout(save,8000);
+    }
+ }
   function inputData(a,number){
     googleMapsClient.places({
         query: a.county+" "+a.location+" "+a.name,
@@ -63,5 +74,5 @@ fs.readFile('data.json', 'utf8', function (err, data) {
     });
   }
 
-  setTimeout(save,15000);
+  //setTimeout(save,40000);
 
