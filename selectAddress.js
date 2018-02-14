@@ -2,20 +2,19 @@
 var fs = require("fs");
 
 var googleMapsClient = require("@google/maps").createClient({
-    key: "A"
+    key: "AIzaSyD51Dpm3_n9DjQgoNfSOoq1bmTR7ECrnRw"
 });
 var obj=[];
+var timer;
 fs.readFile('data.json', 'utf8', function (err, data) {
     if (err) throw err;
      obj = JSON.parse(data);
     console.log(obj.table[0].county);
     console.log(obj.table.length);
     var objStr = obj.table;
-    //obj.table.length
-    //for(var i = 1;i < obj.table.length ;i++){
-        //inputData(obj.table[i],i);
-        timer=setInterval(test,800);
-    //}
+
+    timer = setInterval(test,800);
+ 
   });
 
   var obj2 = {
@@ -24,8 +23,7 @@ fs.readFile('data.json', 'utf8', function (err, data) {
  var y=0
  function test(){
     inputData(obj.table[y],y); 
-    //console.log(y);
-    //console.log(obj.table[y].county+" "+obj.table[y].location+" "+obj.table[y].name);
+ 
     y++;
     if(y>=obj.table.length){
         clearInterval(timer);
@@ -64,7 +62,7 @@ fs.readFile('data.json', 'utf8', function (err, data) {
     //console.log(obj2.table[0].gps.lat);
     //console.log(json);
     
-    fs.writeFile('data2.json', json, 'utf8', function(err){
+    fs.writeFile('data3.json', json, 'utf8', function(err){
         if(err){
             console.log(err);
         }
