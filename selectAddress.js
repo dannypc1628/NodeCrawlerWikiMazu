@@ -64,7 +64,7 @@ fs.readFile('data.json', 'utf8', function (err, data) {
     //console.log(obj2.table[0].gps.lat);
     //console.log(json);
     
-    fs.writeFile('data2.json', json, 'utf8', function(err){
+    fs.writeFile('data3.json', json, 'utf8', function(err){
         if(err){
             console.log(err);
         }
